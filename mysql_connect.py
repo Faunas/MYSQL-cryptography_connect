@@ -1,16 +1,14 @@
 from cryptography.fernet import Fernet
 import MySQLdb
-
-
-# Создаем ключ шифрования
-key = Fernet.generate_key()
-
-# Задаем строку, которую нужно зашифровать
-
-key = b'7dsvb5q_bmInW5_nQy8mK-JMiy9ZlLgw-a1tRMCpntA='
+from create_stealth_key_in_temp import *
 
 # Создаем объект шифрования на основе ключа
-f = Fernet(key)
+try:
+    f = Fernet(key)
+except Exception:
+    os.remove("C:/temp/keycode.txt")
+    print("Произошла ошибка. Выполняю сброс. Перезапустите программу.")
+    quit()
 
 # Выводим зашифрованную строку и ключ шифрования
 print("Зашифрованная строка:",
